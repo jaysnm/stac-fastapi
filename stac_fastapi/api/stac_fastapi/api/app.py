@@ -317,6 +317,10 @@ class StacApi:
         self.client.title = self.title
         self.client.description = self.description
 
+        # add root_path if so specified
+        if self.settings.root_path != "":
+            self.app.root_path = self.settings.root_path
+
         fields_ext = self.get_extension(FieldsExtension)
         if fields_ext:
             self.settings.default_includes = fields_ext.default_includes

@@ -23,6 +23,7 @@ class ApiSettings(BaseSettings):
 
     app_host: str = "0.0.0.0"
     app_port: int = 8000
+    root_path: str = ""
     reload: bool = True
     enable_response_models: bool = False
 
