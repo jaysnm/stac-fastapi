@@ -225,6 +225,7 @@ class AsyncBaseTransactionsClient(abc.ABC):
 class LandingPageMixin:
     """Create a STAC landing page (GET /)."""
 
+    conformance_classes: List[str] = attr.ib()
     stac_version: str = attr.ib(default=STAC_VERSION)
     landing_page_id: str = attr.ib(default="stac-fastapi")
     title: str = attr.ib(default="stac-fastapi")
@@ -263,7 +264,7 @@ class LandingPageMixin:
                     "rel": Relations.conformance.value,
                     "type": MimeTypes.json,
                     "title": "STAC/WFS3 conformance classes implemented by this server",
-                    "href": base_url,
+                    "href": urljoin(base_url, "conformance"),
                 },
                 {
                     "rel": Relations.search.value,
@@ -286,6 +287,12 @@ class BaseCoreClient(LandingPageMixin, abc.ABC):
     """
 
     extensions: List[ApiExtension] = attr.ib(default=attr.Factory(list))
+    conformance_classes: List[str] = attr.ib(
+        factory=lambda: [
+            "https://stacspec.org/STAC-api.html",
+            "http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#ats_geojson",
+        ]
+    )
 
     def extension_is_enabled(self, extension: Type[ApiExtension]) -> bool:
         """Check if an api extension is enabled."""
@@ -313,7 +320,6 @@ class BaseCoreClient(LandingPageMixin, abc.ABC):
             )
         return landing_page
 
-    @abc.abstractmethod
     def conformance(self, **kwargs) -> stac_types.Conformance:
         """Conformance classes.
 
@@ -322,7 +328,7 @@ class BaseCoreClient(LandingPageMixin, abc.ABC):
         Returns:
             Conformance classes which the server conforms to.
         """
-        ...
+        stac_types.Conformance(conformsTo=self.conformance_classes)
 
     @abc.abstractmethod
     def post_search(
@@ -431,6 +437,12 @@ class AsyncBaseCoreClient(LandingPageMixin, abc.ABC):
     """
 
     extensions: List[ApiExtension] = attr.ib(default=attr.Factory(list))
+    conformance_classes: List[str] = attr.ib(
+        factory=lambda: [
+            "https://stacspec.org/STAC-api.html",
+            "http://docs.opengeospatial.org/is/17-069r3/17-069r3.html#ats_geojson",
+        ]
+    )
 
     def extension_is_enabled(self, extension: Type[ApiExtension]) -> bool:
         """Check if an api extension is enabled."""
@@ -458,7 +470,6 @@ class AsyncBaseCoreClient(LandingPageMixin, abc.ABC):
             )
         return landing_page
 
-    @abc.abstractmethod
     async def conformance(self, **kwargs) -> stac_types.Conformance:
         """Conformance classes.
 
@@ -467,7 +478,7 @@ class AsyncBaseCoreClient(LandingPageMixin, abc.ABC):
         Returns:
             Conformance classes which the server conforms to.
         """
-        ...
+        stac_types.Conformance(conformsTo=self.conformance_classes)
 
     @abc.abstractmethod
     async def post_search(
