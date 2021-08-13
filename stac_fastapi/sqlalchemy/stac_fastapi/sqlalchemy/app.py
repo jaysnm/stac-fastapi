@@ -1,4 +1,6 @@
 """FastAPI application."""
+from starlette.middleware.cors import CORSMiddleware
+
 from stac_fastapi.api.app import StacApi
 from stac_fastapi.extensions.core import (
     FieldsExtension,
@@ -35,6 +37,15 @@ api = StacApi(
     search_request_model=SQLAlchemySTACSearch,
 )
 app = api.app
+
+# ADD CORSMiddleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["GET", "POST"],
+    allow_headers=["*"],
+)
 
 
 def run():
