@@ -38,6 +38,8 @@ class FieldsExtension(ApiExtension):
             "links",
             "assets",
             "properties.datetime",
+            "properties.proj:epsg",
+            "properties.odc:product",
         }
     )
 
