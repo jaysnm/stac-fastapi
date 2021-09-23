@@ -25,8 +25,10 @@ class ApiSettings(BaseSettings):
     app_port: int = 8000
     reload: bool = True
     enable_response_models: bool = False
-    root_path: str = ""
     openapi_url: str = "/api"
+    root_path: str = ""
+    app_title: str = "stac-fastapi"
+    app_description: str = "stac-fastapi"
 
     class Config:
         """model config (https://pydantic-docs.helpmanual.io/usage/model_config/)."""

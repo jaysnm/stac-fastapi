@@ -25,6 +25,9 @@ services:
       - GDAL_DISABLE_READDIR_ON_OPEN=EMPTY_DIR
       - DB_MIN_CONN_SIZE=1
       - DB_MAX_CONN_SIZE=1
+      - ROOT_PATH=
+      - APP_TITLE=SpatioTemporal Asset Catalog
+      - APP_DESCRIPTION=A specification that provides a common language to describe a range of geospatial information, so it can more easily be indexed and discovered.
     ports:
       - "8081:8081"
     volumes:

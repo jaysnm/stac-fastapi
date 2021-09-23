@@ -319,8 +319,10 @@ class StacApi:
         # inject settings
         self.client.extensions = self.extensions
         self.client.stac_version = self.stac_version
-        self.client.title = self.title
-        self.client.description = self.description
+
+        # set app title and description from settings
+        self.client.title = self.settings.app_title
+        self.client.description = self.settings.app_description
 
         # add root_path if so specified
         if self.settings.root_path != "":
