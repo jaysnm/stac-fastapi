@@ -25,7 +25,7 @@ class ApiSettings(BaseSettings):
     app_port: int = 8000
     reload: bool = True
     enable_response_models: bool = False
-
+    root_path: str = ""
     openapi_url: str = "/api"
 
     class Config:
