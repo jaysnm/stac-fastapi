@@ -1,14 +1,27 @@
 # Changelog
 
-## [Unreleased]
+## Unreleased
 
 ### Added
 
+### Changed
+
 ### Removed
+
+### Fixed
+
+* Links stored with Collections and Items (e.g. license links) are now returned with those STAC objects ([#282](https://github.com/stac-utils/stac-fastapi/pull/282))
+
+## [2.2.0]
+
+### Added
+
+* Add ability to override ItemCollectionUri and SearchGetRequest models ([#271](https://github.com/stac-utils/stac-fastapi/pull/271))
+* Added `collections` attribute to list of default fields to include, so that we satisfy the STAC API spec, which requires a `collections` attribute to be output when an item is part of a collection ([#276](https://github.com/stac-utils/stac-fastapi/pull/276))
 
 ### Changed
 
-### Fixed
+* Update get_item in sqlalchemy backend to allow for querying for items with same ids but in different collections. ([#275](https://github.com/stac-utils/stac-fastapi/pull/275))
 
 ## [2.1.1]
 
@@ -25,6 +38,7 @@
 
 * Pin FastAPI to 0.67 to avoid issues with rendering OpenAPI documentation ([#246](https://github.com/stac-utils/stac-fastapi/pull/246))
 * Add `stac_version` to default search attributes ([#268](https://github.com/stac-utils/stac-fastapi/pull/268))
+* pgstac backend specifies collection_id when fetching a single item ([#279](https://github.com/stac-utils/stac-fastapi/pull/270))
 
 ## [2.1.0]
 
@@ -78,7 +92,8 @@ _2020-09-25_
 
 * First PyPi release!
 
-[Unreleased]: <https://github.com/stac-utils/stac-fastapi/compare/2.1.1..main>
+[Unreleased]: <https://github.com/stac-utils/stac-fastapi/compare/2.2.0..main>
+[2.2.0]: <https://github.com/stac-utils/stac-fastapi/compare/2.1.1..2.2.0>
 [2.1.1]: <https://github.com/stac-utils/stac-fastapi/compare/2.1.0..2.1.1>
 [2.1.0]: <https://github.com/stac-utils/stac-fastapi/compare/2.1.0..main>
 [2.0.0]: <https://github.com/stac-utils/stac-fastapi/compare/1.1.0..2.0.0>
